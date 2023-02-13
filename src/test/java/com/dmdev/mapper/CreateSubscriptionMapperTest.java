@@ -16,14 +16,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CreateSubscriptionMapperTest {
 
     private final CreateSubscriptionMapper mapper = CreateSubscriptionMapper.getInstance();
-
+    private final Instant expirationDate = Instant.now().plus(30, ChronoUnit.DAYS);
     @Test
     void map() {
         CreateSubscriptionDto dto = CreateSubscriptionDto.builder()
                 .userId(13)
                 .name("Roman")
                 .provider("GOOGLE")
-                .expirationDate(Instant.now().plus(30, ChronoUnit.DAYS))
+                .expirationDate(expirationDate)
                 .build();
 
         Subscription actualResult = mapper.map(dto);
@@ -32,7 +32,7 @@ class CreateSubscriptionMapperTest {
                 .userId(13)
                 .name("Roman")
                 .provider(Provider.GOOGLE)
-                .expirationDate(Instant.now().plus(30, ChronoUnit.DAYS))
+                .expirationDate(expirationDate)
                 .status(Status.ACTIVE)
                 .build();
 
